@@ -2,3 +2,37 @@
 .viewContainer {
 	margin: 20px;
 }
+
+.thumbnail {
+	position: relative;
+	min-height: 135px;
+}
+.thumbnail h3 {
+	font-size: 1em;
+}
+.thumbnail img {
+	float: right;
+	margin: 10px;
+}
+.thumbnail .destroy {
+	display: block;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: 5px;
+	bottom: 5px;
+	background: url( ../images/delete-icon.png ) no-repeat;
+	text-indent: -999em;
+}
+
+.modal-open .modal,.btn:focus{
+    outline:none!important
+}
+
+.book {
+	margin: 10px;
+}
+
+.linkCompleted {
+	cursor: pointer;
+}

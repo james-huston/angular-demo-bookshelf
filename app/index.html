@@ -1,24 +1,34 @@
+<!doctype html>
 
 <html ng-app="bookshelf">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Charlotte.js | Our Library</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
   <link rel="stylesheet" href="app.css" />
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
 
-  <ul class="nav nav-tabs">
-    <li>
-      <a href="#/">Home</a>
-    </li>
-    <li>
-      <a href="#/books">My Books</a>
-    </li>
-  </ul>
+  <div class="navbar" ng-controller="NavigationController">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Our Library</a>
+      <ul class="nav">
+        <li ><a href="#/">Home</a></li>
+        <li ><a href="#/book">Add a book</a></li>
+      </ul>
+    </div>
+  </div>
 
   <div ng-view class="viewContainer"></div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   <script src="scripts/app.js"></script>
+  <script src="scripts/services/bookdata.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
