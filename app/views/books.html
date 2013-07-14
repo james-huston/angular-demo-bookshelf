@@ -4,22 +4,28 @@
     <li class="book span4" ng-repeat="book in bookArray">
       <div class="thumbnail">
         <img ng-src="/images/books/{{ book.img }}" alt="Cover">
-        <p><strong>{{ book.title }}</strong><br>
-        by {{ book.author }}</p>
+        <p>
+          <a ng-href="/#/book/{{$index}}">
+            <strong>{{ book.title }}</strong>
+          </a>
+          <br />
+          by {{ book.author }}
+        </p>
         <p>
           <strong>Completed: </strong>
-          <a class="linkCompleted" ng-click="toggleStatus($index)" class="togglestatus">
+          <a class="angularLink" ng-click="toggleStatus($index)" class="togglestatus">
             <span ng-hide="!book.completed">Yes</span>
             <span ng-hide="book.completed">No</span>
           </a>
         </p>
-        <a href="#" ng-click="removeBook($index)" class="destroy">Remove from library</a>
+        <a class="angularLink destroy" ng-click="removeBook($index)">
+          Remove from library</a>
       </div>
     </li>
   </ul>
 </div>
 
-<div class="clear">
+<div class="">
   <ul class="nav nav-pills">
     <li class="active">
       <a href="#/">All Books</a>

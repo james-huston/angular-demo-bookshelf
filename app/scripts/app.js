@@ -37,7 +37,26 @@ angular.module('bookshelf', ['bookshelf.services'])
 
 })
 
-.controller('BookController', function ($scope, BookService) {
+.controller('BookController', function ($scope, BookService, $routeParams, $location) {
+  $scope.bookId = $routeParams.bookId || undefined;
+  $scope.book = {};
+
+  if ($scope.bookId !== undefined) {
+    $scope.book = BookService.getBooks($scope.bookId);
+  }
+
+  $scope.updateBook = function (bookId) {
+    if (bookId !== undefined) {
+      BookService.updateBook(bookId, $scope.book);
+    } else {
+      BookService.addBook($scope.book);
+    }
+    $location.url('/');
+  };
+
+  $scope.cancelUpdate = function () {
+    $location.url('/');
+  }
 
 })
 
