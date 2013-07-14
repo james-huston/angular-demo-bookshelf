@@ -1,0 +1,24 @@
+
+<html ng-app="bookshelf">
+<head>
+  <link rel="stylesheet" href="app.css" />
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <ul class="nav nav-tabs">
+    <li>
+      <a href="#/">Home</a>
+    </li>
+    <li>
+      <a href="#/books">My Books</a>
+    </li>
+  </ul>
+
+  <div ng-view class="viewContainer"></div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>
