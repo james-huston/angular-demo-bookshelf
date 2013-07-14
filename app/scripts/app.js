@@ -3,10 +3,6 @@ angular.module('bookshelf', ['bookshelf.services'])
 
 .config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'views/books.html',
-      controller: 'BookshelfController'
-    })
     .when('/book', {
       templateUrl: 'views/book.html',
       controller: 'BookController'
@@ -15,32 +11,40 @@ angular.module('bookshelf', ['bookshelf.services'])
       templateUrl: 'views/book.html',
       controller: 'BookController'
     })
+    .when('/:filter', {
+      templateUrl: 'views/books.html',
+      controller: 'BookshelfController'
+    })
     .otherwise({
       redirectTo: '/'
     });
 })
 
-.controller('BookshelfController', function ($scope, BookService) {
+.controller('BookshelfController', function ($scope, BookService, $routeParams) {
+  var filter = $routeParams.filter || undefined;
+  $scope.readFilter = {};
+  if (filter === 'reading') {
+    $scope.readFilter.completed = 'false';
+  } else if (filter === 'completed') {
+    $scope.readFilter.completed = 'true';
+  }
+
   $scope.bookArray = BookService.getBooks();
 
   $scope.toggleStatus = function (bookId) {
     var book = BookService.getBooks(bookId);
-
     book.completed = !book.completed;
-
     BookService.updateBook(bookId, book);
   };
 
   $scope.removeBook = function (bookId) {
     BookService.deleteBook(bookId);
   };
-
 })
 
 .controller('BookController', function ($scope, BookService, $routeParams, $location) {
-  $scope.bookId = $routeParams.bookId || undefined;
   $scope.book = {};
-
+  $scope.bookId = $routeParams.bookId || undefined;
   if ($scope.bookId !== undefined) {
     $scope.book = BookService.getBooks($scope.bookId);
   }
@@ -57,13 +61,10 @@ angular.module('bookshelf', ['bookshelf.services'])
   $scope.cancelUpdate = function () {
     $location.url('/');
   }
-
 })
 
 .controller('NavigationController', function ($scope, $location) {
   $scope.path = $location.path();
-})
-
-;
+});
 
 angular.module('bookshelf.services', []);

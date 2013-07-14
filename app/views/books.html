@@ -1,7 +1,7 @@
 
 <div>
   <ul class="nav">
-    <li class="book span4" ng-repeat="book in bookArray">
+    <li class="book span4" ng-repeat="book in bookArray | filter:readFilter">
       <div class="thumbnail">
         <img ng-src="/images/books/{{ book.img }}" alt="Cover">
         <p>
@@ -25,7 +25,7 @@
   </ul>
 </div>
 
-<div class="">
+<div class="span12">
   <ul class="nav nav-pills">
     <li class="active">
       <a href="#/">All Books</a>
