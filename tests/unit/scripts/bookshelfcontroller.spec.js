@@ -1,16 +1,20 @@
-
-describe('Our bookshelf app', function () {
+/**
+ * Tests for our BookshelfController.
+ *
+ * @author James Huston <james@jameshuston.net>
+ * @since 2013-07-18
+ */
+describe('In our bookshelf app', function () {
   it('should find true to be truthy', function () {
     expect(true).toBeTruthy();
   });
 
   beforeEach(module('bookshelf'));
 
-
   describe('the bookshelf controller', function () {
     var bookshelfController, scope, bookService;
 
-    beforeEach(inject(function($rootScope, BookService, $controller) {
+    beforeEach(inject(function ($rootScope, BookService, $controller) {
       scope = $rootScope.$new();
 
       bookService = BookService;

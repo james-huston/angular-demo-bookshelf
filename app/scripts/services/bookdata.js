@@ -1,4 +1,14 @@
-
+/**
+ * A fake book service for working with book data.
+ *
+ * This basically "fakes" a database or webservice calls and just
+ * stores the data in a local array. Ideally this would use something
+ * like ng-resource to make restful calls to an api for all of these
+ * operations. 
+ *
+ * @author James Huston <james@jameshuston.net>
+ * @since 2013-07-18
+ */
 angular.module('bookshelf.services')
 
 .service('BookService', function () {

@@ -1,4 +1,9 @@
-
+/**
+ * Our main app file with our module declarations and controllers.
+ *
+ * @author James Huston <james@jameshuston.net>
+ * @since 2013-07-18
+ */
 angular.module('bookshelf', ['bookshelf.services'])
 
 .config(function ($routeProvider) {
