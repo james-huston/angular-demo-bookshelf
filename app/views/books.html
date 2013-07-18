@@ -3,9 +3,9 @@
   <ul class="nav">
     <li class="book span4" ng-repeat="book in bookArray | filter:readFilter">
       <div class="thumbnail">
-        <img ng-src="/images/books/{{ book.img }}" alt="Cover">
+        <img ng-src="images/books/{{ book.img }}" alt="Cover">
         <p>
-          <a ng-href="/#/book/{{$index}}">
+          <a ng-href="#/book/{{$index}}">
             <strong>{{ book.title }}</strong>
           </a>
           <br />
