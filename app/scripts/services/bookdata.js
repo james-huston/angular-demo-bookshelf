@@ -52,7 +52,7 @@ angular.module('bookshelf.services')
       return books[bookId];
     },
     setBooks: function (booksArray) {
-      books = booksArray
+      books = booksArray;
     },
     updateBook: function (bookId, bookData) {
       books[bookId] = bookData;
