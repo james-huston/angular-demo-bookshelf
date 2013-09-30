@@ -8,31 +8,34 @@ angular.module('bookshelf', ['bookshelf.services', 'ui.router'])
 
 .config(function ($routeProvider, $stateProvider) {
   // $routeProvider
-    // .when('/book', {
-    //   templateUrl: 'views/book.html',
-    //   controller: 'BookController'
-    // })
-    // .when('/book/:bookId', {
-    //   templateUrl: 'views/book.html',
-    //   controller: 'BookController'
-    // })
-    // .when('/:filter', {
-    //   templateUrl: 'views/books.html',
-    //   controller: 'BookshelfController'
-    // })
-    // .otherwise({
-    //   redirectTo: '/'
-    // });
+  //   .when('/book', {
+  //     templateUrl: 'views/book.html',
+  //     controller: 'BookController'
+  //   })
+  //   .when('/book/:bookId', {
+  //     templateUrl: 'views/book.html',
+  //     controller: 'BookController'
+  //   })
+  //   .when('/:filter', {
+  //     templateUrl: 'views/books.html',
+  //     controller: 'BookshelfController'
+  //   })
+  //   .otherwise({
+  //     redirectTo: '/'
+  //   });
 
   $stateProvider
     .state('index', {
       url: '/:filter',
       views: {
-        'mainContent@': {
+        'rootview@': {
+          templateUrl: 'views/rootview.html'
+        },
+        'mainContent@index': {
           templateUrl: 'views/main.html',
           controller: 'BookshelfController'
         },
-        'rightBar@': {
+        'rightBar@index': {
           template: ''
         }
       }
@@ -40,7 +43,7 @@ angular.module('bookshelf', ['bookshelf.services', 'ui.router'])
     .state('index.book', {
       url: '/book',
       views: {
-        'rightBar@': {
+        'rightBar@index': {
           templateUrl: 'views/book.html',
           controller: 'BookController'
         }
@@ -48,8 +51,13 @@ angular.module('bookshelf', ['bookshelf.services', 'ui.router'])
     })
     .state('index.book.edit', {
       url: '/:bookId',
+      resolve: {
+        vara: function () {
+            console.log('resolving');
+          }
+      },
       views: {
-        'rightBar@': {
+        'rightBar@index': {
           templateUrl: 'views/book.html',
           controller: 'BookController'
         }
@@ -58,8 +66,6 @@ angular.module('bookshelf', ['bookshelf.services', 'ui.router'])
 })
 
 .controller('AppController', function ($state, $stateParams) {
-  $state.go('index');
-  console.log($state);
 })
 
 .controller('BookshelfController', function ($scope, BookService, $stateParams, $state) {
