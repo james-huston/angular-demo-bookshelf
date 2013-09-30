@@ -1,1 +1,37 @@
-Welcome
+  <div class="span12">
+    <ul class="nav nav-pills">
+      <li ng-class="{'active': !filter}">
+        <a href="#/">All Books</a>
+      </li>
+      <li ng-class="{'active': filter == 'reading'}">
+        <a href="#/reading">Reading</a>
+      </li>
+      <li ng-class="{'active': filter == 'completed'}">
+        <a href="#/completed">Completed</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="nav">
+    <li class="book span3" ng-repeat="book in bookArray | filter:readFilter">
+      <div class="thumbnail">
+        <img ng-src="images/books/{{ book.img }}" alt="Cover">
+        <p>
+          <a ui-sref="index.book.edit({bookId: $index})">
+            <strong>{{ book.title }}</strong>
+          </a>
+          <br />
+          by {{ book.author }}
+        </p>
+        <p>
+          <strong>Completed: </strong>
+          <a class="angularLink" ng-click="toggleStatus($index)" class="togglestatus">
+            <span ng-hide="!book.completed">Yes</span>
+            <span ng-hide="book.completed">No</span>
+          </a>
+        </p>
+        <a class="angularLink destroy" ng-click="removeBook($index)">
+          Remove from library</a>
+      </div>
+    </li>
+  </ul>

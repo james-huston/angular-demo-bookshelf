@@ -11,21 +11,26 @@
   <link rel="stylesheet" href="app.css" />
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
-<body>
+<body ng-controller="AppController">
 
   <div class="navbar" ng-controller="NavigationController">
     <div class="navbar-inner">
       <a class="brand" href="#">Our Library</a>
       <ul class="nav">
-        <li ><a href="#/">Home</a></li>
-        <li ><a href="#/book">Add a book</a></li>
+        <li ><a ui-sref="index">Home</a></li>
+        <li ><a ui-sref="index.book">Add a book</a></li>
       </ul>
     </div>
   </div>
 
-  <div ng-view class="viewContainer"></div>
+  <div class="viewContainer" ui-view='bookshelf'>
+    <div class="mainContent span8" ui-view="mainContent"></div>
+    <div class="rightBar span4" ui-view="rightBar"></div>
+  </div>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="scripts/angular-ui-router.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/services/bookdata.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

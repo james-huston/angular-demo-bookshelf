@@ -1,6 +1,5 @@
 
 .viewContainer {
-	margin: 20px;
 }
 
 .thumbnail {
@@ -30,9 +29,17 @@
 }
 
 .book {
-	margin: 10px;
+	margin-bottom: 10px;
 }
 
 .angularLink {
 	cursor: pointer;
+}
+
+.rightBar {
+	float: right;
+};
+
+.mainContent {
+
 }

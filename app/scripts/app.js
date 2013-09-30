@@ -4,29 +4,67 @@
  * @author James Huston <james@jameshuston.net>
  * @since 2013-07-18
  */
-angular.module('bookshelf', ['bookshelf.services'])
+angular.module('bookshelf', ['bookshelf.services', 'ui.router'])
 
-.config(function ($routeProvider) {
-  $routeProvider
-    .when('/book', {
-      templateUrl: 'views/book.html',
-      controller: 'BookController'
+.config(function ($routeProvider, $stateProvider) {
+  // $routeProvider
+    // .when('/book', {
+    //   templateUrl: 'views/book.html',
+    //   controller: 'BookController'
+    // })
+    // .when('/book/:bookId', {
+    //   templateUrl: 'views/book.html',
+    //   controller: 'BookController'
+    // })
+    // .when('/:filter', {
+    //   templateUrl: 'views/books.html',
+    //   controller: 'BookshelfController'
+    // })
+    // .otherwise({
+    //   redirectTo: '/'
+    // });
+
+  $stateProvider
+    .state('index', {
+      url: '/:filter',
+      views: {
+        'mainContent@': {
+          templateUrl: 'views/main.html',
+          controller: 'BookshelfController'
+        },
+        'rightBar@': {
+          template: ''
+        }
+      }
     })
-    .when('/book/:bookId', {
-      templateUrl: 'views/book.html',
-      controller: 'BookController'
+    .state('index.book', {
+      url: '/book',
+      views: {
+        'rightBar@': {
+          templateUrl: 'views/book.html',
+          controller: 'BookController'
+        }
+      }
     })
-    .when('/:filter', {
-      templateUrl: 'views/books.html',
-      controller: 'BookshelfController'
-    })
-    .otherwise({
-      redirectTo: '/'
+    .state('index.book.edit', {
+      url: '/:bookId',
+      views: {
+        'rightBar@': {
+          templateUrl: 'views/book.html',
+          controller: 'BookController'
+        }
+      },
     });
 })
 
-.controller('BookshelfController', function ($scope, BookService, $routeParams) {
-  var filter = $routeParams.filter || undefined;
+.controller('AppController', function ($state, $stateParams) {
+  $state.go('index');
+  console.log($state);
+})
+
+.controller('BookshelfController', function ($scope, BookService, $stateParams, $state) {
+  var filter = $stateParams.filter || undefined;
+  $scope.filter = filter;
   $scope.readFilter = {};
   if (filter === 'reading') {
     $scope.readFilter.completed = 'false';
@@ -44,12 +82,13 @@ angular.module('bookshelf', ['bookshelf.services'])
 
   $scope.removeBook = function (bookId) {
     BookService.deleteBook(bookId);
+    $state.go('index');
   };
 })
 
-.controller('BookController', function ($scope, BookService, $routeParams, $location) {
+.controller('BookController', function ($scope, BookService, $stateParams, $state) {
   $scope.book = {};
-  $scope.bookId = $routeParams.bookId || undefined;
+  $scope.bookId = $stateParams.bookId || undefined;
   if ($scope.bookId !== undefined) {
     $scope.book = BookService.getBooks($scope.bookId);
   }
@@ -60,11 +99,11 @@ angular.module('bookshelf', ['bookshelf.services'])
     } else {
       BookService.addBook($scope.book);
     }
-    $location.url('/');
+    $state.go('index');
   };
 
   $scope.cancelUpdate = function () {
-    $location.url('/');
+    $state.go('index');
   }
 })
 
